@@ -1,20 +1,23 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./App.css";
-import Home from "./pages/Home";
-import BlogPost from "./pages/BlogPost";
-import CreateBlogPost from "./pages/CreateBlogPost";
 
 function App() {
+  const useToggle = () => {
+    const [isToggle, setIsToggle] = useState(false);
+
+    const handleToggle = () => {
+      setIsToggle(!isToggle);
+    };
+    return { isToggle, handleToggle };
+  };
+  const { isToggle, handleToggle } = useToggle();
+
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog-post" element={<BlogPost />} />
-          <Route path="/create-blog-post" element={<CreateBlogPost />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <div>
+      <button onClick={handleToggle}>Click Me!</button>
+
+      {isToggle ? <h1>Toggle</h1> : null}
+    </div>
   );
 }
 
